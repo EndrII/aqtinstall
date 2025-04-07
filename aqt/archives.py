@@ -412,6 +412,13 @@ class QtArchives:
             os_name += "_x86"
         elif os_name != "linux_arm64" and os_name != "all_os" and os_name != "windows_arm64":
             os_name += "_x64"
+        
+        # issue 792
+        # see https://github.com/miurahr/aqtinstall/issues/792#issuecomment-2765494223
+        # target is not used for IFW tool 
+        if (name == "ifw" && self.version >= Version("4.8.0")):
+            self.target = ""
+
         os_target_folder = posixpath.join(
             "online/qtsdkrepository",
             os_name,
